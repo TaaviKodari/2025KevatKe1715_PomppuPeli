@@ -11,6 +11,9 @@ let mailanLeveys = 40;
 let olioLista = [];
 let olioAjastin;
 
+let pisteet = 0;
+let elamat = 3;
+
 function preload(){
     taustakuva = loadImage('kuvat/tausta.png');
     pelastettavakuva = loadImage('kuvat/pelastettava.png');
@@ -31,6 +34,7 @@ function draw(){
    //image(pelastettavakuva,50,50,50,50);    
     liikutaOlioita();
     piirraMaila();
+    PiirraUI();
 }
 
 function piirraMaila(){
@@ -50,9 +54,21 @@ function liikutaOlioita(){
 
         if(olio.Y > pelinKorkeus){
             olioLista.splice(index,1);
+            elamat --;
         }
 
+        if(olio.X > pelinLeveys){
+            olioLista.splice(index,1);
+            pisteet ++;
+        }
     });
+}
+
+function PiirraUI(){
+    textSize(20);
+    textAlign(LEFT,TOP);
+    fill("black");
+    text("Score: " + pisteet + "\nLives: " + elamat,5, 10);
 }
 
 class Pelastettava{
